@@ -2,6 +2,5 @@ test
 .DS_Store
 ._*
 .*.swp
-main.c
 *.txt
-/Makefile
+*.o
