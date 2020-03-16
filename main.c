@@ -12,18 +12,18 @@
 
 #include "fillit.h"
 
-int	read_tetr_file(int fd)
-{
-	
-
-
 int	main(int argc, char **argv)
 {
+	t_list *tetr_list;
+
 	if (argc == 2)
 	{
-		if ((fd = open(argv[1], O_RDONLY)) == -1)
+		if(!(tetr_list = read_tetr_file(argv[1])))
+		{
+			ft_putstr("ERROR\n");
 			return (0);
-		read_tetr_file(fd);
+		}
+		ft_lstprint_str(tetr_list);
 	}
 	else
 	{
@@ -31,5 +31,5 @@ int	main(int argc, char **argv)
 		ft_putstr_fd(argv[0], 2);
 		ft_putstr_fd(" [file]\n", 2);
 	}
-return (0);
+	return (0);
 }
