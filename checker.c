@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fillit.h"
+
+/*
+**	Counts the total number of sides every '#' character touches
+**	and number of characters. If number of sides is 6 or 8 and number
+**	of characters is 4 - check is passed, else function returns -1.
+*/
+
 int	check_tetr(char *tetr, int i, int end)
 {
 	int connect;
@@ -38,6 +46,11 @@ int	check_tetr(char *tetr, int i, int end)
 	return (((connect == 6 || connect == 8) && count < 5) ? 0 : -1);
 }
 
+/*
+**	Checks if format of the tetromino is correct.
+**	Returns -1 if check is failed.
+*/
+
 int	check_tetr_format(char *tetr, int start)
 {
 	int i;
@@ -62,6 +75,11 @@ int	check_tetr_format(char *tetr, int start)
 	}
 	return (0);
 }
+
+/*
+**	Checks correct placement of ending \n or \0 of every tetromino.
+**	Returns -1 if check is failed.
+*/
 
 int	check_tetr_buf(char *tetr)
 {
