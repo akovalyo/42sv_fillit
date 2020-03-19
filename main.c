@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovalyo <al.kovalyov@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_list *tetr_list;
+	t_tetr *tetr_list;
 
 	if (argc == 2)
 	{
@@ -23,7 +23,11 @@ int	main(int argc, char **argv)
 			ft_putstr("ERROR\n");
 			return (0);
 		}
-		ft_lstprint_str(tetr_list);
+		while (tetr_list != NULL)
+		{
+			printf("[%d, %d], %c\n", tetr_list->x[3], tetr_list->y[3], tetr_list->letter);
+			tetr_list = tetr_list->next;
+		}
 	}
 	else
 	{

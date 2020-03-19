@@ -12,87 +12,67 @@
 
 #include "fillit.h"
 
-int	check_tetr(char *tetr, int i)
+t_tetr	*create_tetr(char *tetr_piece, char letter)
 {
-	int connect;
-	int end;
-	int start;
+	t_tetr	*new;
+	int	xy;
+	int	i;
 
-	connect = 0;
-	start = i;
-	end = i + 20;
-	while (i < end)
+
+	xy = 0;
+	i = 0;
+	if (!(new = (t_tetr *)malloc(sizeof(t_tetr))))
+		return (NULL);
+	while (i < 20)
 	{
-		if (tetr[i] == '#')
+		if (tetr_piece[i] == '#')
 		{
-			if ((i + 1) < end && tetr[i + 1] == '#')
-				connect++;
-			if ((i - 1) >= start && tetr[i -1] == '#')
-				connect++;
-			if ((i + 5) < end && tetr[i + 5] == '#')
-				connect++;
-			if ((i - 5) >= start && tetr[i - 5] == '#')
-				connect++;
+			new->x[xy] = (i <= 5) ? i : (i % 5);
+			new->y[xy] = i / 5;
+
+			xy++;
 		}
 		i++;
 	}
-	return ((connect == 6 || connect == 8) ? 0 : -1);
+	new->letter = letter;
+	new = move(new);
+	return (new);
 }
-
-int	check_tetr_format(char *tetr, int start, int end)
+	
+int	add_tetr_to_list(char *tetr_buf, int size, t_tetr **tetr_list, int i)
 {
-	int i;
-
-	i = 1;
-	while (start <= end)
+	t_tetr	*cur;
+	char	letter;
+	
+	letter = 'A';
+	while (i < size)
 	{
-		if ((tetr[start] == '.' || tetr[start] == '#') && i % 5 != 0)
-		{	
-			start++;
-			i++;
-		}
-		else if (tetr[start] == '\n' && i % 5 == 0)
+		if (check_tetr_format(tetr_buf, i) < 0 || check_tetr(tetr_buf, i, i + 20) < 0 || \
+		check_tetr_buf(tetr_buf) < 0)
+		       return (-1);
+		if (letter == 'A')
 		{
-			start++;
-			i++;
+			*tetr_list = create_tetr(&tetr_buf[i], letter);
+			cur = *tetr_list;
 		}
 		else
-			return (-1);
+		{
+			cur->next = create_tetr(&tetr_buf[i], letter);
+			cur = cur->next;
+		}
+		letter++;
+		i += 21;
 	}
+	cur->next = NULL;
 	return (0);
 }
 
-int	add_tetr_to_list(char *tetr_buf, int tetr_size, t_list **tetr_list)
-{
-	char tetr[TETR_SIZE + 1];
-	int i;
-	t_list *new;
-
-	i == 0;
-	while (tetr_buf[i])
-	{
-		ft_bzero(tetr, TETR_SIZE + 1);
-		if (check_tetr_format(tetr_buf, i, i + 19) < 0 && check_tetr(tetr_buf, i) < 0)
-		       return (-1);
-		ft_strncpy(tetr, &tetr_buf[i], TETR_SIZE);
-		new = ft_lstnew(tetr, TETR_SIZE + 1);
-		ft_lstadd_back(tetr_list, new);
-		i += 20;
-		if (tetr_buf[i] != '\n' && tetr_buf[i] != '\0')
-			return (-1);
-		else if (tetr_buf[i] == '\0')
-			return (0);
-		i++;
-	}
-	return (0);
-}
-
-t_list	*read_tetr_file(char *file)
+t_tetr	*read_tetr_file(char *file)
 {
 	int fd;
 	int byte_read;
 	char tetr_buf[546];
-	t_list *tetr_list;
+	t_tetr *tetr_list;
 	
 	if ((fd = open(file, O_RDONLY)) < 0)
 		return (NULL);
@@ -103,8 +83,11 @@ t_list	*read_tetr_file(char *file)
 		return (NULL);
 	}
 	else
-		if (add_tetr_to_list(tetr_buf, byte_read, &tetr_list) < 0)
+	{
+		if (add_tetr_to_list(tetr_buf, byte_read, &tetr_list, 0) < 0)
 			return (NULL);
+	}
+	close(fd);
 	return (tetr_list);
 }
 	

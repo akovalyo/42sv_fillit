@@ -15,11 +15,28 @@
 
 # include "libft.h"
 # include <fcntl.h>
+
+#include <stdio.h>
+
 # define TETR_SIZE 20
 
-int	check_tetr(char *tetr, int i);
-int	check_tetr_format(char *tetr, int start, int end);
-int	add_tetr_to_list(char *tetr_buf, int tetr_size, t_list **tetr_list);
-t_list	*read_tetr_file(char *file);
+typedef struct 		s_tetr
+{
+	char 		letter;
+	int		x[4];
+	int		y[4];
+	struct s_tetr	*next;
+
+}			t_tetr;
+
+t_tetr	*create_tetr(char *tetr_peace, char letter);
+int	add_tetr_to_list(char *tetr_buf, int size, t_tetr **tetr_list, int i);
+t_tetr	*read_tetr_file(char *file);
+int	check_tetr(char *tetr, int i, int end);
+int	check_tetr_format(char *tetr, int start);
+int	check_tetr_buf(char *tetr);
+t_tetr	*move(t_tetr *tetr);
+void	move_y(t_tetr *tetr);
+void	move_x(t_tetr *tetr);
 
 #endif
