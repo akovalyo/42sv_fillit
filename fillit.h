@@ -25,9 +25,15 @@ typedef struct 		s_tetr
 	char 		letter;
 	int		x[4];
 	int		y[4];
+	int		xy[2];
 	struct s_tetr	*next;
 
 }			t_tetr;
+
+typedef struct		s_map
+{
+	char		**map;
+}			t_map;
 
 t_tetr	*create_tetr(char *tetr_peace, char letter);
 int	add_tetr_to_list(char *tetr_buf, int size, t_tetr **tetr_list, int i);
@@ -38,5 +44,10 @@ int	check_tetr_buf(char *tetr);
 t_tetr	*move(t_tetr *tetr);
 void	move_y(t_tetr *tetr);
 void	move_x(t_tetr *tetr);
+int	lst_tetr_size(t_tetr *lst);
+int	sqroot(int n);
+t_map	create_map(int map_size);
+void	delete_map(t_map *map, int map_size);
+
 
 #endif

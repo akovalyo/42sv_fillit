@@ -18,7 +18,6 @@ t_tetr	*create_tetr(char *tetr_piece, char letter)
 	int	xy;
 	int	i;
 
-
 	xy = 0;
 	i = 0;
 	if (!(new = (t_tetr *)malloc(sizeof(t_tetr))))
@@ -29,12 +28,12 @@ t_tetr	*create_tetr(char *tetr_piece, char letter)
 		{
 			new->x[xy] = (i <= 5) ? i : (i % 5);
 			new->y[xy] = i / 5;
-
 			xy++;
 		}
 		i++;
 	}
 	new->letter = letter;
+	new->xy = {0, 0};
 	new = move(new);
 	return (new);
 }

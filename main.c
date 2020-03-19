@@ -20,20 +20,20 @@ int	main(int argc, char **argv)
 	{
 		if(!(tetr_list = read_tetr_file(argv[1])))
 		{
-			ft_putstr("ERROR\n");
+			ft_putstr("ERROR WHILE READING FILE\n");
 			return (0);
 		}
+		
 		while (tetr_list != NULL)
 		{
-			printf("[%d, %d], %c\n", tetr_list->x[3], tetr_list->y[3], tetr_list->letter);
+			printf("[%d, %d], %c\n", tetr_list->xy[0], tetr_list->xy[1], tetr_list->letter);
 			tetr_list = tetr_list->next;
 		}
+		//printf("%d\n%d\n", lst_tetr_size(tetr_list), ft_sqroot(8));
+		//for (int i = 4; i <= 104; i += 4)
+		//	printf("%d: %d\n", i, sqroot(i));
 	}
 	else
-	{
-		ft_putstr_fd("usage: ", 2);
-		ft_putstr_fd(argv[0], 2);
-		ft_putstr_fd(" [file]\n", 2);
-	}
+		ft_putstr("usage: ./fillit [file]\n");
 	return (0);
 }
