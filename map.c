@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-t_map	create_map(int map_size)
+t_map	*create_map(int map_size)
 {
 	t_map	*map;
 	int	i;
@@ -41,4 +41,17 @@ void	delete_map(t_map *map, int map_size)
 	}
 	ft_memdel((void **)&(map->map));
 	ft_memdel((void **)&map);
+}
+
+void	print_map(t_map *map, int map_size)
+{
+	int i;
+
+	i = 0;
+	while (i < map_size)
+	{
+		ft_putstr(map->map[i]);
+		ft_putchar('\n');
+		i++;
+	}
 }

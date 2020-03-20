@@ -26,15 +26,17 @@ t_tetr	*create_tetr(char *tetr_piece, char letter)
 	{
 		if (tetr_piece[i] == '#')
 		{
-			new->x[xy] = (i <= 5) ? i : (i % 5);
+			new->x[xy] = (i < 5) ? i : (i % 5);
 			new->y[xy] = i / 5;
 			xy++;
 		}
 		i++;
 	}
 	new->letter = letter;
-	new->xy = {0, 0};
+	// correct
 	new = move(new);
+	new->xy[0] = 0;
+	new->xy[1] = 0;
 	return (new);
 }
 	

@@ -35,19 +35,25 @@ typedef struct		s_map
 	char		**map;
 }			t_map;
 
-t_tetr	*create_tetr(char *tetr_peace, char letter);
-int	add_tetr_to_list(char *tetr_buf, int size, t_tetr **tetr_list, int i);
-t_tetr	*read_tetr_file(char *file);
-int	check_tetr(char *tetr, int i, int end);
-int	check_tetr_format(char *tetr, int start);
-int	check_tetr_buf(char *tetr);
-t_tetr	*move(t_tetr *tetr);
-void	move_y(t_tetr *tetr);
-void	move_x(t_tetr *tetr);
-int	lst_tetr_size(t_tetr *lst);
-int	sqroot(int n);
-t_map	create_map(int map_size);
-void	delete_map(t_map *map, int map_size);
-
+t_tetr			*create_tetr(char *tetr_peace, char letter);
+int			add_tetr_to_list(char *tetr_buf, int size, t_tetr **tetr_list, int i);
+t_tetr			*read_tetr_file(char *file);
+int			check_tetr(char *tetr, int i, int end);
+int			check_tetr_format(char *tetr, int start);
+int			check_tetr_buf(char *tetr);
+t_tetr			*move(t_tetr *tetr);
+void			move_y(t_tetr *tetr);
+void			move_x(t_tetr *tetr);
+int			lst_tetr_size(t_tetr *lst);
+int			sqroot(int n);
+void			delete_tetr_list(t_tetr *tetr);
+t_map			*create_map(int map_size);
+void			delete_map(t_map *map, int map_size);
+void			print_map(t_map *map, int map_size);
+void			place_tetr(t_tetr *tetr, t_map *map, char letter);
+int			intersection(t_map *map, t_tetr *tetr);
+int			in_map(t_tetr *tetr, int map_size, int axis);
+int			try_map(t_map *map, t_tetr *tetr, int map_size);
+int			solve(t_tetr *tetr);
 
 #endif

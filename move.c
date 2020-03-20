@@ -24,8 +24,8 @@ void	move_y(t_tetr *tetr)
 {
 	tetr->y[0] -= 1;
 	tetr->y[1] -= 1;
+	tetr->y[2] -= 1;
 	tetr->y[3] -= 1;
-	tetr->y[4] -= 1;
 }
 
 t_tetr	*move(t_tetr *tetr)

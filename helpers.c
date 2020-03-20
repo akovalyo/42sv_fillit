@@ -36,3 +36,15 @@ int	sqroot(int n)
 		sqrt++;
 	return (sqrt);
 }
+
+void	delete_tetr_list(t_tetr *tetr)
+{
+	t_tetr *tmp;
+
+	while (tetr)
+	{
+		tmp = tetr;
+		tetr = tetr->next;
+		free (tmp);
+	}
+}
